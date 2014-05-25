@@ -33,6 +33,21 @@ void setup() {
   valveOpen[i] = false;
 }
 
+char serialReadWithTimeout(long timeout){
+  char retVal;
+  unsigned long timeStart = millis();
+  while(Serial.available() == 0){ // check for timeout
+    if(millis() - timeStart > timeout)
+    {
+      retVal = '\0';
+      return retVal;
+    } 
+  }
+  retVal = Serial.read();
+  return retVal;
+
+}
+
 // the loop routine runs over and over again forever:
 void loop() {
   unsigned long currentMillis = millis();
@@ -57,8 +72,7 @@ void loop() {
     Serial.write(serialIn);
     if(serialIn == 'o') // open a valve
     {
-      while(Serial.available() == 0);
-      char serialIn = Serial.read();
+      serialIn = serialReadWithTimeout(1000);
       Serial.write(serialIn);
       if(serialIn == '0') // open valve 0
       {
@@ -74,8 +88,7 @@ void loop() {
     }
     else if(serialIn == 'c') // close a valve 
     {
-      while(Serial.available() == 0);
-       char serialIn = Serial.read();
+       serialIn = serialReadWithTimeout(1000);
       if(serialIn == '0')  // close valve 0
       {
         relay3.off(); 
@@ -87,6 +100,7 @@ void loop() {
     delay(1000);
   }
 }
+
 
 
 
