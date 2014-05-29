@@ -64,6 +64,13 @@ void loop() {
         Serial.write('e'); // arduino closed a valve
         Serial.write('0'); /// valve number 0
       }
+      if(i==1)
+      {
+        valveOpen[1] = false;
+        relay2.off();
+        Serial.write('e'); // arduino closed a valve
+        Serial.write('1'); /// valve number 1 
+      }
     }
 
   }
@@ -81,18 +88,31 @@ void loop() {
         valveOpen[0] = true;
         Serial.write('k'); // confirm
       }
-
+      if(serialIn == '1') // open valve 0
+      {
+        relay2.on();
+        previousMillis[1] = millis();
+        valveOpen[1] = true;
+        Serial.write('1');
+        Serial.write('k'); // confirm
+      }
       //relay3.off();
       //Serial.write('d');
 
     }
     else if(serialIn == 'c') // close a valve 
     {
-       serialIn = serialReadWithTimeout(1000);
+      serialIn = serialReadWithTimeout(1000);
       if(serialIn == '0')  // close valve 0
       {
         relay3.off(); 
         valveOpen[0] = false;
+        Serial.write('k'); // confirm
+      }
+      if(serialIn == '1')  // close valve 0
+      {
+        relay2.off(); 
+        valveOpen[1] = false;
         Serial.write('k'); // confirm
       }
     }
@@ -100,6 +120,7 @@ void loop() {
     delay(1000);
   }
 }
+
 
 
 

@@ -18,16 +18,16 @@ class ArduinoControl(object):
         self.ser = serial.Serial('/dev/ttyACM0',9600)
         self.valveThread = None
 
-    def _openValve(self,valveNr=0):
+    def openValve(self,valveNr=0):
         """ opens the valve. blocks until the arduino has closed the valve again """
         print "opening valve"
-        self.ser.write('o0')
+        self.ser.write('o{0}'.format(valveNr))
         #print self.ser.read()
         #print self.ser.read()
 
-    def _closeValve(self,valveNr=0):
+    def closeValve(self,valveNr=0):
         print "closing valve"
-        self.ser.write('c0')
+        self.ser.write('c{0}'.format(valveNr))
 
     def valveStatus(self,valvNr=0):
         if self.valveThread == None:
@@ -38,14 +38,5 @@ class ArduinoControl(object):
         self.valveThread = None
         return {'status':'closed'}
 
-    def openValve(self):
-        """ calls _openValve in a thread. Returns the status (open, closed) as json """
-        if self.valveThread == None or not self.valveThread.isAlive():
-            self.valveThread = FuncThread(self._openValve)
-            self.valveThread.start()
-
-        
-
-        
-        return self.valveStatus()
+    
             
