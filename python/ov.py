@@ -1,7 +1,8 @@
+import json
 import arduinoControl
 from time import sleep
-
-ac = arduinoControl.ArduinoControl()
+config =  json.loads(open("/home/pi/garden/python/config.json").read())
+ac = arduinoControl.ArduinoControl(config)
 
 def o(valveNumber=0,times=1):
     for ii in range(times):

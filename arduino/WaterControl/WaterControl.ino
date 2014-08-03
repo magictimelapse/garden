@@ -14,10 +14,10 @@
 int led = 13;
 TKRelay relay0(O0);
 TKRelay relay1(O1);
-TKRelay relay2(O2);
-TKRelay relay3(O3);
-TKRelay relay4(O4);
-TKRelay relay5(O5);
+TKRelay relay2(O2); // i = 1
+TKRelay relay3(O3); // i = 0
+TKRelay relay4(O4); // i = 2
+TKRelay relay5(O5); // i = 3
 
 long previousMillis[MAX_NUMBER_OF_VALVES];
 bool valveOpen[MAX_NUMBER_OF_VALVES];
@@ -71,6 +71,20 @@ void loop() {
         Serial.write('e'); // arduino closed a valve
         Serial.write('1'); /// valve number 1 
       }
+      if(i==2)
+      {
+        valveOpen[2] = false;
+        relay4.off();
+        Serial.write('e'); // arduino closed a valve
+        Serial.write('2'); /// valve number 1 
+      }
+       if(i==3)
+      {
+        valveOpen[3] = false;
+        relay5.off();
+        Serial.write('e'); // arduino closed a valve
+        Serial.write('3'); /// valve number 1 
+      }
     }
 
   }
@@ -88,12 +102,28 @@ void loop() {
         valveOpen[0] = true;
         Serial.write('k'); // confirm
       }
-      if(serialIn == '1') // open valve 0
+      if(serialIn == '1') // open valve 1
       {
         relay2.on();
         previousMillis[1] = millis();
         valveOpen[1] = true;
         Serial.write('1');
+        Serial.write('k'); // confirm
+      }
+      if(serialIn == '2') // open valve 2
+      {
+        relay4.on();
+        previousMillis[2] = millis();
+        valveOpen[2] = true;
+        Serial.write('2');
+        Serial.write('k'); // confirm
+      }
+      if(serialIn == '3') // open valve 3
+      {
+        relay5.on();
+        previousMillis[3] = millis();
+        valveOpen[3] = true;
+        Serial.write('3');
         Serial.write('k'); // confirm
       }
       //relay3.off();
@@ -109,15 +139,27 @@ void loop() {
         valveOpen[0] = false;
         Serial.write('k'); // confirm
       }
-      if(serialIn == '1')  // close valve 0
+      if(serialIn == '1')  // close valve 1
       {
         relay2.off(); 
         valveOpen[1] = false;
         Serial.write('k'); // confirm
       }
+       if(serialIn == '2')  // close valve 2
+      {
+        relay4.off(); 
+        valveOpen[2] = false;
+        Serial.write('k'); // confirm
+      }
+       if(serialIn == '3')  // close valve 3
+      {
+        relay5.off(); 
+        valveOpen[3] = false;
+        Serial.write('k'); // confirm
+      }
     }
     Serial.write("d");
-    delay(1000);
+    delay(10);
   }
 }
 

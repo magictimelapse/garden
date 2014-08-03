@@ -1,0 +1,31 @@
+{ 
+  "database":
+  {"type":"exosite", 
+      "cik": "8ca0befbd3553ba02cb6212b3ba6a9aec874a2ae",
+       "aliases": 
+         {"temp":"weatherTemp",
+ 	  "hum":"weatherHumidity",
+	  "raspiTemp":"RaspiTemp",
+	  "wateringDuration0":"WateringDuration",
+	  "wateringDuration1":"WateringDuration1"}
+      
+   },
+   "valve":
+   [
+   {"description":"tomato and paprika",
+   "nr": 0,
+   "baseWateringDuration": 5,
+   "maxWateringDuration": 20,
+   "linearModel": 1.0,
+   "thresholdTemperature": 20,
+   "wateringHour":"4,6,12,18,22"},
+   
+   {"description":"pumpkins, strawberries, beans, ...",
+   "baseWateringDuration": 20,
+   "nr": 1,
+   "maxWateringDuration": 60,
+   "linearModel": 2.0,
+   "thresholdTemperature": 20,
+   "wateringHour":"2,5,9,11,14,16,18,23"}]
+
+}
