@@ -26,7 +26,8 @@ class ArduinoControl(object):
         #print self.ser.read()
         #print self.ser.read()
         #print "updating db"
-        self._updateDB.updateWateringDuration(1.0,valveNr)
+        if valveNr < 2:
+            self._updateDB.updateWateringDuration(1.0,valveNr)
 
     def closeValve(self,valveNr=0):
         print "closing valve"

@@ -5,6 +5,7 @@ import time
 import json
 from apscheduler.scheduler import Scheduler
 import ov
+import random
 import logging;logging.basicConfig(level=logging.DEBUG,filename='/home/pi/garden/python/irrigation.log',format='%(asctime)s %(message)s')
 logging.debug('irrugation loading')
 
@@ -36,15 +37,18 @@ class IrrigationClient(object):
         wateringDuration = self.getWateringDuration(valve)
         #zclient = zerorpc.Client()
         #zclient.connect("tcp://127.0.0.1:4242")
-        
+        ### sleep some random time <5 seconds
+        time.sleep(5*random.random())
         print "opening valve {0} for {1}".format(valve,wateringDuration)
         logging.info( "opening valve {0} for {1}".format(valve,wateringDuration))
         for ii in range(wateringDuration):
             print "opening: {0}".format(ii)
             logging.info("opening: {0}".format(ii))
             #zclient.openValve(valve)
+            ov.o(3) # always open valve 3 (main valve)
+            time.sleep(3)
             ov.o(valve)
-            time.sleep(28)
+            time.sleep(25)
 
 
 
@@ -61,7 +65,7 @@ if __name__ == "__main__":
         print "scheduling", wateringHour, vv
         logging.info("scheduling {0} {1}".format( wateringHour, vv))
         
-        sched.add_cron_job(ig.irrigate,args=[vv], hour = wateringHour, minute=12)
+        sched.add_cron_job(ig.irrigate,args=[vv], hour = wateringHour, minute=40)
 
     ## endless loop ##
     while True:

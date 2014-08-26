@@ -1,7 +1,7 @@
 { 
   "database":
   {"type":"exosite", 
-      "cik": "8ca0befbd3553ba02cb6212b3ba6a9aec874a2ae",
+      "cik": "",
        "aliases": 
          {"temp":"weatherTemp",
  	  "hum":"weatherHumidity",
@@ -10,6 +10,7 @@
 	  "wateringDuration1":"WateringDuration1"}
       
    },
+   "location":"Schinznach-Dorf,ch",
    "valve":
    [
    {"description":"tomato and paprika",
@@ -18,7 +19,7 @@
    "maxWateringDuration": 20,
    "linearModel": 2.0,
    "thresholdTemperature": 20,
-   "wateringHour":"4,6,12,18,22"},
+   "wateringHour":"4,6,12,19,22"},
    
    {"description":"pumpkins, strawberries, beans, ...",
    "baseWateringDuration": 20,
