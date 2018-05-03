@@ -1,5 +1,5 @@
 import urllib2
-from pyonep import onep
+#from pyonep import onep
 from datetime import datetime,timedelta
 import numpy
 import time
@@ -36,4 +36,5 @@ class UpdateDB(object):
 
 
     def updateWateringDuration(self,duration,valve):
-        self._db.updateWateringDuration(duration,valve)
+        if False:
+            self._db.updateWateringDuration(duration,valve)

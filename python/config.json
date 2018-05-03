@@ -1,6 +1,6 @@
 { 
   "database":
-  {"type":"exosite", 
+  {"type":"exositedd", 
       "cik": "",
        "aliases": 
          {"temp":"weatherTemp",
