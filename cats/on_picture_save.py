@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/home/pi/miniconda3/envs/ml/bin/python
 import os, sys
 import json
 import crop_images
@@ -15,4 +15,5 @@ if __name__ == "__main__":
     filename_txt = os.path.splitext(filename)[0]+'.json'
     with open(filename_txt,'w') as outfile:
         json.dump(out_dict,outfile)
+    os.system('sync')
     crop_images.crop_image(filename_txt)
