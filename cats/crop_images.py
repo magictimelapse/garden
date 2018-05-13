@@ -4,7 +4,11 @@ import json
 import os
 import sys
 def crop_image(jfilename):
-    data = json.load(open(jfilename))
+    try:
+        data = json.load(open(jfilename))
+    except ValueError as e:
+        print('problem decoding {0}'.format(jfilename))
+        return
     ifilename = data['filename']
     img = Image.open(ifilename)
     left = data['center_x'] - data['width']/2
@@ -24,6 +28,9 @@ if __name__=="__main__":
     path = sys.argv[1]
     import glob
     jfilenames = glob.glob(os.path.join(path, '*.json'))
-    for j in jfilenames:
+    length = len(jfilenames)
+    for ii,j in enumerate(jfilenames):
         crop_image(j)
+        if ii%500 == 0:
+            print ('{0}/{1}'.format(ii,length))
 
