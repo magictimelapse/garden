@@ -22,17 +22,22 @@ class ArduinoControl(object):
     def openValve(self,valveNr=0):
         """ opens the valve. blocks until the arduino has closed the valve again. Send update to database."""
         #print "opening valve"
-        self.ser.write('o{0}'.format(valveNr))
-        #print self.ser.read()
+        try:
+            self.ser.write('o{0}'.format(valveNr))
+        except TypeError as e:
+            self.ser.write('o{0}'.format(valveNr).encode('utf-8'))
+            #print self.ser.read()
         #print self.ser.read()
         #print "updating db"
         if valveNr < 2:
             self._updateDB.updateWateringDuration(1.0,valveNr)
 
     def closeValve(self,valveNr=0):
-        print "closing valve"
-        self.ser.write('c{0}'.format(valveNr))
-
+        print ("closing valve")
+        try:
+            self.ser.write('c{0}'.format(valveNr))
+        except TypeError as e:
+            self.ser.write('c{0}'.format(valveNr).encode('utf-8'))
     def valveStatus(self,valvNr=0):
         if self.valveThread == None:
             return {'status':'closed'}

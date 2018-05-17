@@ -1,4 +1,4 @@
-import urllib2
+#import urllib2
 #from pyonep import onep
 from datetime import datetime,timedelta
 import numpy
@@ -20,7 +20,7 @@ class ExositeWriter(object):
             #print self._dataport_alias_duration[valve]
             self._o.write(self._cik, {"alias": self._dataport_alias_duration[valve]}, duration/2., {})
         except Exception as e:
-            print e
+            print (e)
             pass
         
         
