@@ -14,7 +14,7 @@ import logging
 logging.basicConfig(filename='/opt/motion/cat.log',level=logging.DEBUG)
 
 def request_server(filename):
-    c = zerorpc.Client()
+    c = zerorpc.Client(heartbeat=60)
     c.connect('tcp://127.0.0.1:4242')
     return c.cat_recognition({'filename':filename})
  
@@ -23,7 +23,7 @@ def main(run_nr):
         logging.debug('running : {0}'.format(run_nr))
         time.sleep(6)
         img_path = '/opt/motion/cropped'
-        filenames_cropped = glob.glob(os.path.join(img_path,'{0}-*cropped.jpg'.format(run_nr)))
+        filenames_cropped = sorted(glob.glob(os.path.join(img_path,'{0}-*cropped.jpg'.format(run_nr))))
         filenames_cropped = filenames_cropped[:16]
         print (filenames_cropped)
         catsFound = 0
@@ -32,6 +32,7 @@ def main(run_nr):
         for filename_cropped in filenames_cropped:
             logging.debug(filename_cropped)
             classification = request_server(filename_cropped)
+            logging.debug("cats found: {0}".format(catsFound))
             #0: cats, 1: noCat
             logging.debug('cats: {0}, noCat:  {1}'.format(classification['cats'],classification['noCat']))
             if classification['cats'] > 0.9:
@@ -39,7 +40,7 @@ def main(run_nr):
                 newPath = '/opt/motion/cropped/cats/'
                 shutil.copy2(filename_cropped, newPath)
             elif classification['noCat'] > 0.9:
-                catsFound -= 2
+                catsFound -= 0.5
                 newPath = '/opt/motion/cropped/noCat/'
                 shutil.copy2(filename_cropped, newPath)
             else:
