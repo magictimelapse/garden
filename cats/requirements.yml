@@ -1,0 +1,22 @@
+name: ml
+dependencies:
+- freetype=2.5.2=2
+- h5py=2.5.0=np19py34_3
+- hdf5=1.8.15.1=1
+- jpeg=8d=0
+- libgfortran=1.0=0
+- libpng=1.6.17=0
+- libtiff=4.0.2=1
+- numpy=1.9.2=py34_1
+- openblas=0.2.14=1
+- openssl=1.0.1k=1
+- pillow=2.9.0=py34_0
+- pip=7.1.2=py34_0
+- python=3.4.3=1
+- scipy=0.16.0=np19py34_1
+- setuptools=18.1=py34_0
+- six=1.9.0=py34_0
+- sqlite=3.8.4.1=1
+- wheel=0.24.0=py34_0
+- xz=5.0.5=0
+- zlib=1.2.8=0
