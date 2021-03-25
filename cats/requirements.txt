@@ -28,7 +28,7 @@ protobuf==3.5.2.post1
 ptyprocess==0.5.2
 Pygments==2.2.0
 pyserial==3.4
-PyYAML==3.12
+PyYAML==5.4
 pyzmq==17.0.0
 requests==2.18.4
 scipy==0.16.0
