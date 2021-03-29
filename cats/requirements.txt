@@ -26,7 +26,7 @@ Pillow==2.9.0
 prompt-toolkit==1.0.15
 protobuf==3.5.2.post1
 ptyprocess==0.5.2
-Pygments==2.2.0
+Pygments==2.7.4
 pyserial==3.4
 PyYAML==3.12
 pyzmq==17.0.0
