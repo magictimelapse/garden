@@ -37,7 +37,7 @@ six==1.11.0
 tensorflow==1.1.0
 traitlets==4.3.2
 typing==3.6.4
-urllib3==1.22
+urllib3==1.26.5
 wcwidth==0.1.7
 Werkzeug==0.14.1
 zerorpc==0.6.1
